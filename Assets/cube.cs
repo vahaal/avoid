@@ -18,7 +18,7 @@ public class cube : MonoBehaviour {
         cubeRigidBody = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         createRateTimer -= Time.deltaTime;
         if (createRateTimer <= 0)
