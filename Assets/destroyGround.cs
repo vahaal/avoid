@@ -7,6 +7,15 @@ public class destroyGround : MonoBehaviour {
     public void OnTriggerEnter(Collider other)
     {
         Destroy(other.gameObject);
-        Time.timeScale += 0.1f;
+        if (Time.timeScale == 10)
+        {
+            Time.timeScale += 0.05f;
+        }
+        if (Time.timeScale == 20)
+        {
+            Time.timeScale += 0.03f;
+        }
+        else
+            Time.timeScale += 0.1f;
     }
 }
