@@ -7,19 +7,40 @@ public class move : MonoBehaviour {
     Vector3 positionX;
     float moveSpeed = 0.1f;
 
+
+    private Vector3 moveDirection = Vector3.zero;
     private void Start()
     {
         positionX = transform.position;
     }
     void Update()
     {
-        transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, 0) * moveSpeed;
+        CharacterController controller = GetComponent<CharacterController>();
+        if (controller.isGrounded)
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0,0);
+        }
+            //transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, 0) * moveSpeed;
 
-        //transform.position = Mathf.Clamp(positionX, positionBorder, positionBorder);
-        
+            //transform.position = new Vector3( Mathf.Clamp(1, -4, 4),0,0);
+
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
-        Destroy(gameObject);
+
+
+        if (other.gameObject.tag == "TimeSlower")
+        {
+            Time.timeScale -= 0.5f;
+            Debug.Log("zmnienia");
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "Wall")
+        {
+            Debug.Log("elo");
+        }
+        else
+            Destroy(gameObject);
+
     }
 }
