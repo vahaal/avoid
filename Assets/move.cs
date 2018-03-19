@@ -15,14 +15,10 @@ public class move : MonoBehaviour {
     }
     void Update()
     {
-        CharacterController controller = GetComponent<CharacterController>();
-        if (controller.isGrounded)
-        {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0,0);
-        }
-            //transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, 0) * moveSpeed;
+        
+        transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, 0) * moveSpeed;
 
-            //transform.position = new Vector3( Mathf.Clamp(1, -4, 4),0,0);
+            
 
     }
     private void OnCollisionEnter(Collision other)
@@ -35,12 +31,11 @@ public class move : MonoBehaviour {
             Debug.Log("zmnienia");
             Destroy(other.gameObject);
         }
-        if (other.gameObject.tag == "Wall")
-        {
-            Debug.Log("elo");
-        }
-        else
-            Destroy(gameObject);
 
+        else
+        {
+            Destroy(gameObject);
+            Time.timeScale = 0;
+        }
     }
 }
